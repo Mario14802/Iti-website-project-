@@ -1,0 +1,47 @@
+/* ===== LAYOUT ===== */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+main {
+    padding: 48px 0;
+}
+
+.section {
+    margin-bottom: 48px;
+}
+
+.section h2 {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    border-left: 4px solid #c0392b;
+    padding-left: 14px;
+}
+
+.section h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.section p {
+    margin-bottom: 14px;
+    color: #444;
+}
+
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #e0dbd5;
+    margin: 36px 0;
+}

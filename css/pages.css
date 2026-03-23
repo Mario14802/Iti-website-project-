@@ -1,0 +1,39 @@
+/* ===== BLOG ===== */
+.blog-post {
+    background: #fff;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-left: 4px solid #c0392b;
+}
+
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 10px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ===== STATS ===== */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+    text-align: center;
+}
+
+.stat-box {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+}
