@@ -1,10 +1,13 @@
 /* ===== HERO ===== */
 .hero {
+    background-image: url("../Images/hero.jpg");
+    background-size: cover;
+    background-position: center;
     background-color: #1a1a1a;
     color: #fff;
     padding: 80px 0;
     text-align: center;
-    border-bottom: 4px solid #c0392b;
+    border-bottom: 4px solid #000000;
 }
 
 .hero h1 {
