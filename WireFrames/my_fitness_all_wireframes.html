@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M&Y Fitness — All Page Wireframes</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f0ede8;
+  color: #1a1a18;
+}
+
+/* ── TAB NAV ── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #dddbd3;
+  display: flex; gap: 0;
+  overflow-x: auto;
+  padding: 0 16px;
+}
+.tab-btn {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  font-size: 13px; font-weight: 500;
+  color: #888780; background: none; border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: #3d3d3a; }
+.tab-btn.active { color: #1a1a18; border-bottom-color: #1a1a18; }
+
+/* ── PAGE WRAPPER ── */
+.page { display: none; padding: 24px 16px 48px; max-width: 720px; margin: 0 auto; }
+.page.active { display: block; }
+.page-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: #888780;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-title::after { content:''; flex:1; height:1px; background:#dddbd3; }
+
+/* ── SHARED WIREFRAME ATOMS ── */
+.wf { display: flex; flex-direction: column; gap: 10px; }
+.section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .09em;
+  text-transform: uppercase; color: #888780;
+  margin-bottom: 4px; margin-top: 6px;
+}
+.block {
+  background: #eeecea;
+  border: 0.5px solid #c8c6be;
+  border-radius: 8px;
+  overflow: hidden; position: relative;
+}
+.block-inner { padding: 14px 16px; }
+.ann {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 20px;
+  background: #dbedf8; color: #185fa5;
+  position: absolute; top: 8px; right: 10px;
+}
+.section-sep {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: #888780;
+  display: flex; align-items: center; gap: 8px;
+  margin: 12px 0 4px;
+}
+.section-sep::before, .section-sep::after { content:''; flex:1; height:.5px; background:#dddbd3; }
+
+/* shared shape atoms */
+.ph  { background:#b4b2a9; border-radius:3px; }   /* primary placeholder */
+.sh  { background:#c8c6be; border-radius:3px; }   /* secondary */
+.th  { background:#dddbd3; border-radius:3px; }   /* tertiary / text line */
+.row { display:flex; gap:10px; align-items:center; }
+.col { display:flex; flex-direction:column; gap:7px; }
+
+/* NAV (reused on every page) */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 16px; background:#fff;
+  border-bottom:.5px solid #dddbd3;
+}
+.logo { width:80px; height:20px; }
+.nav-links { display:flex; gap:20px; }
+.nav-link { width:44px; height:10px; }
+.nav-cta  { width:70px; height:26px; border-radius:8px; }
+
+/* HERO */
+.hero {
+  min-height:200px;
+  background: repeating-linear-gradient(45deg,#eeecea,#eeecea 6px,#e4e2de 6px,#e4e2de 12px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:28px 20px;
+}
+.hero-h1  { width:260px; height:28px; }
+.hero-sub { width:200px; height:10px; }
+.hero-sub2{ width:160px; height:10px; }
+.btn-row  { display:flex; gap:10px; }
+.btn-s    { width:100px; height:32px; border-radius:8px; }
+.btn-o    { width:100px; height:32px; border-radius:8px; background:transparent; border:1.5px solid #c8c6be; }
+
+/* STATS BAR */
+.stats-bar {
+  display:flex; justify-content:space-around; align-items:center;
+  padding:14px 20px; background:#fff;
+  border-top:.5px solid #dddbd3; border-bottom:.5px solid #dddbd3;
+}
+.stat { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.stat-n { width:40px; height:14px; }
+.stat-l { width:54px; height:8px; }
+.stat-div { width:.5px; height:30px; background:#dddbd3; }
+
+/* SECTION HEADER */
+.sec-hd { display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:12px; }
+.sec-t { width:160px; height:18px; }
+.sec-s { width:240px; height:9px; }
+
+/* CARDS */
+.card-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.card-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.card {
+  background:#fff; border:.5px solid #dddbd3; border-radius:12px;
+  padding:14px 12px; display:flex; flex-direction:column; gap:8px;
+}
+.card.feat { border:1.5px solid #7aabdc; }
+.card-badge { width:60px; height:16px; border-radius:20px; }
+.card-title { width:80px; height:13px; }
+.card-line  { height:8px; }
+.card-btn   { width:70px; height:26px; border-radius:8px; margin-top:4px; }
+.pop-badge  {
+  font-size:10px; font-weight:600; padding:2px 7px;
+  background:#dbedf8; color:#185fa5; border-radius:20px; width:fit-content; margin-bottom:2px;
+}
+.price-tag { width:70px; height:20px; border-radius:4px; margin:4px 0; }
+
+/* FEATURES */
+.feat-card {
+  background:#fff; border:.5px solid #dddbd3; border-radius:12px;
+  padding:12px; display:flex; flex-direction:column; gap:7px;
+}
+.feat-icon { width:28px; height:28px; border-radius:6px; }
+.feat-title { width:80px; height:11px; }
+
+/* TESTIMONIALS */
+.testi-card {
+  background:#fff; border:.5px solid #dddbd3; border-radius:12px;
+  padding:12px; display:flex; flex-direction:column; gap:8px;
+}
+.stars { display:flex; gap:3px; }
+.star { width:10px; height:10px; border-radius:2px; }
+.avatar { width:28px; height:28px; border-radius:50%; flex-shrink:0; }
+
+/* TABLE placeholder */
+.tbl {
+  background:#fff; border:.5px solid #dddbd3; border-radius:8px; overflow:hidden;
+}
+.tbl-head {
+  display:grid; gap:0; padding:8px 12px;
+  background:#eeecea; border-bottom:.5px solid #dddbd3;
+}
+.tbl-row {
+  display:grid; gap:0; padding:8px 12px;
+  border-bottom:.5px solid #dddbd3;
+}
+.tbl-row:last-child { border-bottom:none; }
+.tbl-cell { height:9px; border-radius:3px; }
+
+/* ACCORDION / FAQ */
+.faq-item {
+  background:#fff; border:.5px solid #dddbd3; border-radius:8px;
+  padding:12px 14px; display:flex; justify-content:space-between; align-items:center;
+}
+.faq-q { width:200px; height:10px; }
+.faq-arrow { width:16px; height:16px; border-radius:3px; }
+
+/* CTA BANNER */
+.cta-ban {
+  background: repeating-linear-gradient(-45deg,#eeecea,#eeecea 6px,#e4e2de 6px,#e4e2de 12px);
+  padding:28px 20px; display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+
+/* FOOTER */
+.footer {
+  padding:16px 20px 10px; background:#eeecea;
+  display:flex; flex-direction:column; gap:12px;
+}
+.footer-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.footer-links-group { display:flex; gap:28px; }
+.footer-col { display:flex; flex-direction:column; gap:7px; }
+.footer-div { height:.5px; background:#dddbd3; }
+.footer-bot { display:flex; justify-content:space-between; align-items:center; }
+.social-icon { width:22px; height:22px; border-radius:5px; }
+
+/* ABOUT specifics */
+.about-split { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; }
+.img-ph {
+  min-height:160px;
+  background: repeating-linear-gradient(45deg,#dddbd3,#dddbd3 5px,#c8c6be 5px,#c8c6be 10px);
+  border-radius:10px;
+}
+.value-card {
+  background:#fff; border:.5px solid #dddbd3; border-radius:10px;
+  padding:12px; display:flex; flex-direction:column; gap:7px;
+}
+.val-icon { width:26px; height:26px; border-radius:50%; }
+
+/* LOGIN specifics */
+.login-wrap {
+  max-width:340px; margin:0 auto;
+  background:#fff; border:.5px solid #dddbd3; border-radius:14px;
+  padding:24px 22px; display:flex; flex-direction:column; gap:14px;
+}
+.input-group { display:flex; flex-direction:column; gap:6px; }
+.input-lbl { width:60px; height:9px; }
+.input-field { width:100%; height:36px; border-radius:6px; background:#f5f4f0; border:.5px solid #c8c6be; }
+.divider-or {
+  display:flex; align-items:center; gap:10px;
+  font-size:11px; font-weight:600; color:#888780;
+}
+.divider-or::before, .divider-or::after { content:''; flex:1; height:.5px; background:#dddbd3; }
+.social-login { display:flex; gap:8px; }
+.social-btn { flex:1; height:36px; border-radius:6px; background:#f5f4f0; border:.5px solid #c8c6be; }
+
+/* PROGRAM specifics */
+.prog-meta { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.meta-card {
+  background:#fff; border:.5px solid #dddbd3; border-radius:8px;
+  padding:10px; display:flex; flex-direction:column; gap:6px; align-items:center;
+}
+.meta-icon { width:20px; height:20px; border-radius:4px; }
+.tip-item {
+  display:flex; align-items:flex-start; gap:10px;
+  background:#fff; border:.5px solid #dddbd3; border-radius:8px; padding:10px;
+}
+.tip-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:1px; }
+.tip-lines { display:flex; flex-direction:column; gap:5px; flex:1; }
+</style>
+</head>
+<body>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showPage('about')">About</button>
+  <button class="tab-btn" onclick="showPage('plans')">Plans & Pricing</button>
+  <button class="tab-btn" onclick="showPage('beginner')">Beginner</button>
+  <button class="tab-btn" onclick="showPage('intermediate')">Intermediate</button>
+  <button class="tab-btn" onclick="showPage('advanced')">Advanced</button>
+  <button class="tab-btn" onclick="showPage('login')">Login</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 · ABOUT
+══════════════════════════════════════════ -->
+<div class="page active" id="page-about">
+  <div class="page-title">About page</div>
+  <div class="wf">
+
+    <!-- NAV -->
+    <div class="section-label">Navigation bar</div>
+    <div class="block">
+      <div class="nav">
+        <div class="logo ph"></div>
+        <div class="nav-links">
+          <div class="nav-link ph"></div><div class="nav-link ph"></div>
+          <div class="nav-link ph"></div><div class="nav-link ph"></div>
+        </div>
+        <div class="nav-cta ph"></div>
+      </div>
+      <span class="ann">sticky</span>
+    </div>
+
+    <!-- HERO -->
+    <div class="section-label">Hero / page header</div>
+    <div class="block">
+      <div class="hero">
+        <div class="hero-h1 ph"></div>
+        <div class="hero-sub th"></div>
+        <div class="hero-sub2 th"></div>
+      </div>
+      <span class="ann">dark overlay bg</span>
+    </div>
+
+    <!-- OUR STORY -->
+    <div class="section-sep">Our story</div>
+    <div class="section-label">Two-column: text + image</div>
+    <div class="block">
+      <div class="block-inner">
+        <div class="about-split">
+          <div class="col">
+            <div style="width:100px;height:14px;" class="ph"></div>
+            <div class="th" style="width:100%;height:9px;"></div>
+            <div class="th" style="width:95%;height:9px;"></div>
+            <div class="th" style="width:92%;height:9px;"></div>
+            <div class="th" style="width:88%;height:9px;"></div>
+            <div class="th" style="width:90%;height:9px;"></div>
+            <div class="th" style="width:80%;height:9px;"></div>
+            <div class="th" style="width:70%;height:9px;"></div>
+          </div>
+          <div class="img-ph"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="section-label">Stats bar</div>
+    <div class="block">
+      <div class="stats-bar">
+        <div class="stat"><div class="stat-n ph"></div><div class="stat-l th"></div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n ph"></div><div class="stat-l th"></div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n ph"></div><div class="stat-l th"></div></div>
+        <div class="stat-div"></div>
+        <div class="stat"><div class="stat-n ph"></div><div class="stat-l th"></div></div>
+      </div>
+    </div>
+
+    <!-- MISSION & VALUES -->
+    <div class="section-sep">Mission & values</div>
+    <div class="section-label">Section header</div>
+    <div class="block">
+      <div class="block-inner">
+        <div class="sec-hd">
+          <div class="sec-t ph"></div>
+          <div class="sec-s th"></div>
+        </div>
+      </div>
+    </div>
+    <div class="section-label">Value cards (3-col)</div>
+    <div class="card-grid-3">
+      <div class="value-card">
+        <div class="val-icon sh"></div>
+        <div style="width:70px;height:12px;" class="ph"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:90%;height:8px;"></div>
+        <div class="th" style="width:75%;height:8px;"></div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon sh"></div>
+        <div style="width:80px;height:12px;" class="ph"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:85%;height:8px;"></div>
+        <div class="th" style="width:78%;height:8px;"></div>
+      </div>
+      <div class="value-card">
+        <div class="val-icon sh"></div>
+        <div style="width:65px;height:12px;" class="ph"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:88%;height:8px;"></div>
+        <div class="th" style="width:72%;height:8px;"></div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="section-sep">Meet the team</div>
+    <div class="section-label">Trainer cards (3-col)</div>
+    <div class="card-grid-3">
+      <div class="card" style="align-items:center;text-align:center;">
+        <div style="width:60px;height:60px;border-radius:50%;" class="sh"></div>
+        <div style="width:80px;height:12px;" class="ph"></div>
+        <div style="width:70px;height:9px;" class="th"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:88%;height:8px;"></div>
+      </div>
+      <div class="card" style="align-items:center;text-align:center;">
+        <div style="width:60px;height:60px;border-radius:50%;" class="sh"></div>
+        <div style="width:80px;height:12px;" class="ph"></div>
+        <div style="width:70px;height:9px;" class="th"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:88%;height:8px;"></div>
+      </div>
+      <div class="card" style="align-items:center;text-align:center;">
+        <div style="width:60px;height:60px;border-radius:50%;" class="sh"></div>
+        <div style="width:80px;height:12px;" class="ph"></div>
+        <div style="width:70px;height:9px;" class="th"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:88%;height:8px;"></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section-sep">Call to action</div>
+    <div class="block">
+      <div class="cta-ban">
+        <div class="hero-h1 ph" style="width:200px"></div>
+        <div class="hero-sub th"></div>
+        <div class="btn-row" style="margin-top:6px"><div class="btn-s ph"></div><div class="btn-o"></div></div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section-sep">Footer</div>
+    <div class="block">
+      <div class="footer">
+        <div class="footer-top">
+          <div class="col"><div style="width:70px;height:14px;" class="ph"></div><div style="width:110px;height:8px;" class="th"></div></div>
+          <div class="footer-links-group">
+            <div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div>
+            <div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div>
+            <div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div>
+          </div>
+        </div>
+        <div class="footer-div"></div>
+        <div class="footer-bot">
+          <div style="width:130px;height:8px;" class="th"></div>
+          <div style="display:flex;gap:8px;"><div class="social-icon sh"></div><div class="social-icon sh"></div><div class="social-icon sh"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 · PLANS & PRICING
+══════════════════════════════════════════ -->
+<div class="page" id="page-plans">
+  <div class="page-title">Plans & Pricing page</div>
+  <div class="wf">
+
+    <div class="section-label">Navigation bar</div>
+    <div class="block"><div class="nav"><div class="logo ph"></div><div class="nav-links"><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div></div><div class="nav-cta ph"></div></div><span class="ann">sticky</span></div>
+
+    <div class="section-label">Page header</div>
+    <div class="block">
+      <div class="hero" style="min-height:140px;">
+        <div class="hero-h1 ph"></div>
+        <div class="hero-sub th"></div>
+        <div class="hero-sub2 th"></div>
+      </div>
+    </div>
+
+    <div class="section-sep">Pricing cards</div>
+    <div class="section-label">3-column pricing grid</div>
+    <div class="card-grid-3">
+      <div class="card">
+        <div style="width:55px;height:10px;" class="th"></div>
+        <div style="width:70px;height:16px;" class="ph"></div>
+        <div class="price-tag ph"></div>
+        <div class="th" style="width:95%;height:8px;"></div>
+        <div style="height:.5px;background:#dddbd3;margin:4px 0;"></div>
+        <div class="col" style="gap:6px;">
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:90%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:80%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:85%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:70%;height:8px;" class="th"></div></div>
+        </div>
+        <div class="card-btn sh" style="width:100%;margin-top:6px;"></div>
+      </div>
+      <div class="card feat">
+        <div class="pop-badge">Most Popular</div>
+        <div style="width:40px;height:10px;" class="th"></div>
+        <div style="width:70px;height:16px;" class="ph"></div>
+        <div class="price-tag ph"></div>
+        <div class="th" style="width:95%;height:8px;"></div>
+        <div style="height:.5px;background:#dddbd3;margin:4px 0;"></div>
+        <div class="col" style="gap:6px;">
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:90%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:80%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:85%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:70%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:78%;height:8px;" class="th"></div></div>
+        </div>
+        <div class="card-btn ph" style="width:100%;margin-top:6px;"></div>
+      </div>
+      <div class="card">
+        <div style="width:45px;height:10px;" class="th"></div>
+        <div style="width:80px;height:16px;" class="ph"></div>
+        <div class="price-tag ph"></div>
+        <div class="th" style="width:95%;height:8px;"></div>
+        <div style="height:.5px;background:#dddbd3;margin:4px 0;"></div>
+        <div class="col" style="gap:6px;">
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:90%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:80%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:85%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:70%;height:8px;" class="th"></div></div>
+          <div class="row" style="gap:6px;"><div style="width:10px;height:10px;border-radius:2px;" class="sh"></div><div style="width:65%;height:8px;" class="th"></div></div>
+        </div>
+        <div class="card-btn sh" style="width:100%;margin-top:6px;"></div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-sep">FAQ section</div>
+    <div class="section-label">Section header</div>
+    <div class="block"><div class="block-inner"><div class="sec-hd"><div class="sec-t ph"></div><div class="sec-s th"></div></div></div></div>
+    <div class="section-label">Accordion FAQ items</div>
+    <div class="col" style="gap:8px;">
+      <div class="faq-item"><div class="faq-q ph"></div><div class="faq-arrow sh"></div></div>
+      <div class="faq-item"><div class="faq-q ph" style="width:180px;"></div><div class="faq-arrow sh"></div></div>
+      <!-- expanded item -->
+      <div class="block" style="padding:0;">
+        <div class="faq-item" style="border-bottom:.5px solid #dddbd3;border-radius:8px 8px 0 0;"><div class="faq-q ph" style="width:160px;"></div><div class="faq-arrow ph"></div></div>
+        <div class="block-inner col" style="gap:6px;background:#fff;">
+          <div class="th" style="width:100%;height:8px;"></div>
+          <div class="th" style="width:90%;height:8px;"></div>
+          <div class="th" style="width:75%;height:8px;"></div>
+        </div>
+      </div>
+      <div class="faq-item"><div class="faq-q ph" style="width:220px;"></div><div class="faq-arrow sh"></div></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section-sep">Call to action</div>
+    <div class="block"><div class="cta-ban"><div class="hero-h1 ph" style="width:200px;"></div><div class="hero-sub th"></div><div class="btn-row" style="margin-top:6px;"><div class="btn-s ph"></div><div class="btn-o"></div></div></div></div>
+
+    <!-- FOOTER -->
+    <div class="section-sep">Footer</div>
+    <div class="block"><div class="footer"><div class="footer-top"><div class="col"><div style="width:70px;height:14px;" class="ph"></div><div style="width:110px;height:8px;" class="th"></div></div><div class="footer-links-group"><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div></div></div><div class="footer-div"></div><div class="footer-bot"><div style="width:130px;height:8px;" class="th"></div><div style="display:flex;gap:8px;"><div class="social-icon sh"></div><div class="social-icon sh"></div><div class="social-icon sh"></div></div></div></div></div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 · BEGINNER PROGRAM
+══════════════════════════════════════════ -->
+<div class="page" id="page-beginner">
+  <div class="page-title">Beginner Program page</div>
+  <div class="wf">
+
+    <div class="section-label">Navigation bar</div>
+    <div class="block"><div class="nav"><div class="logo ph"></div><div class="nav-links"><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div></div><div class="nav-cta ph"></div></div><span class="ann">sticky</span></div>
+
+    <div class="section-label">Hero / page header</div>
+    <div class="block">
+      <div class="hero" style="min-height:150px;gap:10px;">
+        <div style="width:130px;height:10px;" class="th"></div>
+        <div class="hero-h1 ph"></div>
+        <div style="width:240px;height:10px;" class="th"></div>
+      </div>
+      <span class="ann">badge + subtitle</span>
+    </div>
+
+    <!-- META -->
+    <div class="section-label">Program meta info (3-col)</div>
+    <div class="prog-meta">
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="section-sep">Program overview</div>
+    <div class="block">
+      <div class="block-inner col" style="gap:8px;">
+        <div style="width:130px;height:14px;" class="ph"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:97%;height:8px;"></div>
+        <div class="th" style="width:93%;height:8px;"></div>
+        <div class="th" style="width:88%;height:8px;"></div>
+        <div class="th" style="width:80%;height:8px;"></div>
+      </div>
+    </div>
+
+    <!-- WEEKLY SCHEDULE TABLE -->
+    <div class="section-sep">Weekly schedule</div>
+    <div class="section-label">Schedule table (Day / Session / Focus / Duration)</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:1fr 1fr 1.5fr 1fr;">
+        <div class="tbl-cell ph" style="width:30px;height:9px;"></div>
+        <div class="tbl-cell ph" style="width:50px;height:9px;"></div>
+        <div class="tbl-cell ph" style="width:70px;height:9px;"></div>
+        <div class="tbl-cell ph" style="width:50px;height:9px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;">
+        <div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:90px;"></div><div class="tbl-cell th" style="width:45px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#f7f6f3;">
+        <div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:80px;"></div><div class="tbl-cell th" style="width:55px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;">
+        <div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:90px;"></div><div class="tbl-cell th" style="width:45px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#f7f6f3;">
+        <div class="tbl-cell sh" style="width:40px;"></div><div class="tbl-cell th" style="width:40px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:20px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;">
+        <div class="tbl-cell sh" style="width:50px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:85px;"></div><div class="tbl-cell th" style="width:45px;"></div>
+      </div>
+    </div>
+
+    <!-- WORKOUTS -->
+    <div class="section-sep">Workout tables (A / B / C)</div>
+    <div class="section-label">Workout A — Push focus</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#eeecea;">
+        <div class="tbl-cell ph" style="width:70px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;">
+        <div class="tbl-cell th" style="width:110px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#f7f6f3;">
+        <div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;">
+        <div class="tbl-cell th" style="width:100px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#f7f6f3;">
+        <div class="tbl-cell th" style="width:90px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div>
+      </div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;">
+        <div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-top:8px;">Workout B & C (same structure, collapsed)</div>
+    <div class="block" style="background:#fff;">
+      <div class="block-inner row" style="justify-content:space-between;">
+        <div style="width:120px;height:12px;" class="ph"></div>
+        <div style="width:60px;height:12px;" class="sh"></div>
+      </div>
+    </div>
+    <div class="block" style="background:#fff;">
+      <div class="block-inner row" style="justify-content:space-between;">
+        <div style="width:130px;height:12px;" class="ph"></div>
+        <div style="width:60px;height:12px;" class="sh"></div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="section-sep">Tips for beginners</div>
+    <div class="col" style="gap:8px;">
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:85%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:78%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:90%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:70%;height:8px;"></div></div></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section-sep">CTA + navigation</div>
+    <div class="block"><div class="block-inner row" style="justify-content:center;gap:12px;"><div class="btn-s ph"></div><div class="btn-o"></div></div></div>
+
+    <!-- FOOTER -->
+    <div class="section-sep">Footer</div>
+    <div class="block"><div class="footer"><div class="footer-top"><div class="col"><div style="width:70px;height:14px;" class="ph"></div><div style="width:110px;height:8px;" class="th"></div></div><div class="footer-links-group"><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div><div style="width:50px;height:8px;" class="th"></div></div></div></div><div class="footer-div"></div><div class="footer-bot"><div style="width:130px;height:8px;" class="th"></div><div style="display:flex;gap:8px;"><div class="social-icon sh"></div><div class="social-icon sh"></div><div class="social-icon sh"></div></div></div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 · INTERMEDIATE PROGRAM
+══════════════════════════════════════════ -->
+<div class="page" id="page-intermediate">
+  <div class="page-title">Intermediate Program page</div>
+  <div class="wf">
+
+    <div class="section-label">Navigation bar</div>
+    <div class="block"><div class="nav"><div class="logo ph"></div><div class="nav-links"><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div></div><div class="nav-cta ph"></div></div><span class="ann">sticky</span></div>
+
+    <div class="section-label">Hero / page header</div>
+    <div class="block">
+      <div class="hero" style="min-height:150px;gap:10px;">
+        <div style="width:160px;height:10px;" class="th"></div>
+        <div class="hero-h1 ph"></div>
+        <div style="width:260px;height:10px;" class="th"></div>
+      </div>
+    </div>
+
+    <div class="section-label">Program meta info (3-col)</div>
+    <div class="prog-meta">
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+    </div>
+
+    <div class="section-sep">Program overview</div>
+    <div class="block"><div class="block-inner col" style="gap:8px;"><div style="width:130px;height:14px;" class="ph"></div><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:95%;height:8px;"></div><div class="th" style="width:90%;height:8px;"></div><div class="th" style="width:85%;height:8px;"></div></div></div>
+
+    <div class="section-sep">Weekly schedule</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:1fr 1fr 1.5fr 1fr;"><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:50px;height:9px;"></div><div class="tbl-cell ph" style="width:90px;height:9px;"></div><div class="tbl-cell ph" style="width:50px;height:9px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:110px;"></div><div class="tbl-cell th" style="width:45px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#f7f6f3;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:100px;"></div><div class="tbl-cell th" style="width:45px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:65px;"></div><div class="tbl-cell th" style="width:40px;"></div><div class="tbl-cell th" style="width:80px;"></div><div class="tbl-cell th" style="width:20px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#f7f6f3;"><div class="tbl-cell sh" style="width:60px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:110px;"></div><div class="tbl-cell th" style="width:45px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.5fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:50px;"></div><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:100px;"></div><div class="tbl-cell th" style="width:45px;"></div></div>
+    </div>
+
+    <div class="section-sep">Workout tables (Upper A / Lower A)</div>
+    <div class="section-label">Upper A — Chest & Back primary</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:2fr 1fr 1fr 1fr;"><div class="tbl-cell ph" style="width:70px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#f7f6f3;"><div class="tbl-cell th" style="width:100px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:110px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#f7f6f3;"><div class="tbl-cell th" style="width:85px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:75px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:30px;"></div><div class="tbl-cell th" style="width:40px;"></div></div>
+    </div>
+    <div class="section-label" style="margin-top:8px;">Lower A (collapsed)</div>
+    <div class="block" style="background:#fff;"><div class="block-inner row" style="justify-content:space-between;"><div style="width:160px;height:12px;" class="ph"></div><div style="width:60px;height:12px;" class="sh"></div></div></div>
+
+    <!-- PROGRESSIVE OVERLOAD -->
+    <div class="section-sep">Progressive overload guidelines</div>
+    <div class="col" style="gap:8px;">
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:88%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:80%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div></div></div>
+      <div class="tip-item"><div class="tip-dot sh"></div><div class="tip-lines"><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:75%;height:8px;"></div></div></div>
+    </div>
+
+    <div class="section-sep">CTA + navigation</div>
+    <div class="block"><div class="block-inner row" style="justify-content:center;gap:12px;"><div class="btn-s ph"></div><div class="btn-o"></div><div class="btn-o"></div></div></div>
+
+    <div class="section-sep">Footer</div>
+    <div class="block"><div class="footer"><div class="footer-top"><div class="col"><div style="width:70px;height:14px;" class="ph"></div><div style="width:110px;height:8px;" class="th"></div></div><div class="footer-links-group"><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div></div></div><div class="footer-div"></div><div class="footer-bot"><div style="width:130px;height:8px;" class="th"></div><div style="display:flex;gap:8px;"><div class="social-icon sh"></div><div class="social-icon sh"></div><div class="social-icon sh"></div></div></div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5 · ADVANCED PROGRAM
+══════════════════════════════════════════ -->
+<div class="page" id="page-advanced">
+  <div class="page-title">Advanced Program page</div>
+  <div class="wf">
+
+    <div class="section-label">Navigation bar</div>
+    <div class="block"><div class="nav"><div class="logo ph"></div><div class="nav-links"><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div></div><div class="nav-cta ph"></div></div><span class="ann">sticky</span></div>
+
+    <div class="section-label">Hero / page header</div>
+    <div class="block">
+      <div class="hero" style="min-height:150px;gap:10px;">
+        <div style="width:180px;height:10px;" class="th"></div>
+        <div class="hero-h1 ph"></div>
+        <div style="width:280px;height:10px;" class="th"></div>
+      </div>
+      <span class="ann">elite tier styling</span>
+    </div>
+
+    <div class="section-label">Program meta info (3-col)</div>
+    <div class="prog-meta">
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+      <div class="meta-card"><div class="meta-icon sh"></div><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div>
+    </div>
+
+    <div class="section-sep">Program overview</div>
+    <div class="block"><div class="block-inner col" style="gap:8px;"><div style="width:130px;height:14px;" class="ph"></div><div class="th" style="width:100%;height:8px;"></div><div class="th" style="width:95%;height:8px;"></div><div class="th" style="width:90%;height:8px;"></div><div class="th" style="width:82%;height:8px;"></div></div></div>
+
+    <div class="section-sep">Weekly schedule</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:1fr 1fr 1.8fr 1fr;"><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:50px;height:9px;"></div><div class="tbl-cell ph" style="width:80px;height:9px;"></div><div class="tbl-cell ph" style="width:50px;height:9px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:50px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#f7f6f3;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:50px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:65px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:130px;"></div><div class="tbl-cell th" style="width:50px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#f7f6f3;"><div class="tbl-cell sh" style="width:60px;"></div><div class="tbl-cell th" style="width:40px;"></div><div class="tbl-cell th" style="width:70px;"></div><div class="tbl-cell th" style="width:20px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:50px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:50px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#f7f6f3;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:55px;"></div><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:50px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:1fr 1fr 1.8fr 1fr;background:#fff;"><div class="tbl-cell sh" style="width:55px;"></div><div class="tbl-cell th" style="width:60px;"></div><div class="tbl-cell th" style="width:90px;"></div><div class="tbl-cell th" style="width:45px;"></div></div>
+    </div>
+
+    <!-- WORKOUT TABLES (push A with technique col) -->
+    <div class="section-sep">Workout tables (Push A / Pull A / Legs A)</div>
+    <div class="section-label">Push A — Chest primary (includes Technique column)</div>
+    <div class="tbl">
+      <div class="tbl-head" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;"><div class="tbl-cell ph" style="width:70px;height:9px;"></div><div class="tbl-cell ph" style="width:25px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div><div class="tbl-cell ph" style="width:60px;height:9px;"></div><div class="tbl-cell ph" style="width:30px;height:9px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:120px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:25px;"></div><div class="tbl-cell th" style="width:15px;"></div><div class="tbl-cell th" style="width:35px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#f7f6f3;"><div class="tbl-cell th" style="width:110px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:25px;"></div><div class="tbl-cell th" style="width:15px;"></div><div class="tbl-cell th" style="width:35px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:65px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:25px;"></div><div class="tbl-cell sh" style="width:70px;border-radius:10px;"></div><div class="tbl-cell th" style="width:35px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#f7f6f3;"><div class="tbl-cell th" style="width:100px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:25px;"></div><div class="tbl-cell th" style="width:15px;"></div><div class="tbl-cell th" style="width:35px;"></div></div>
+      <div class="tbl-row" style="grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#fff;"><div class="tbl-cell th" style="width:80px;"></div><div class="tbl-cell th" style="width:20px;"></div><div class="tbl-cell th" style="width:25px;"></div><div class="tbl-cell sh" style="width:70px;border-radius:10px;"></div><div class="tbl-cell th" style="width:35px;"></div></div>
+    </div>
+    <div class="section-label" style="margin-top:8px;">Pull A & Legs A (collapsed)</div>
+    <div class="block" style="background:#fff;"><div class="block-inner row" style="justify-content:space-between;"><div style="width:140px;height:12px;" class="ph"></div><div style="width:60px;height:12px;" class="sh"></div></div></div>
+    <div class="block" style="background:#fff;"><div class="block-inner row" style="justify-content:space-between;"><div style="width:140px;height:12px;" class="ph"></div><div style="width:60px;height:12px;" class="sh"></div></div></div>
+
+    <!-- DELOAD -->
+    <div class="section-sep">Deload protocol</div>
+    <div class="block" style="border-left:3px solid #b4b2a9;">
+      <div class="block-inner col" style="gap:8px;">
+        <div style="width:160px;height:13px;" class="ph"></div>
+        <div class="th" style="width:100%;height:8px;"></div>
+        <div class="th" style="width:90%;height:8px;"></div>
+        <div class="th" style="width:95%;height:8px;"></div>
+        <div style="margin-top:4px;padding:10px;background:#fff;border-radius:6px;border:.5px solid #dddbd3;">
+          <div class="th" style="width:95%;height:8px;margin-bottom:6px;"></div>
+          <div class="th" style="width:85%;height:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-sep">CTA + navigation</div>
+    <div class="block"><div class="block-inner row" style="justify-content:center;gap:12px;"><div class="btn-s ph"></div><div class="btn-o"></div></div></div>
+
+    <div class="section-sep">Footer</div>
+    <div class="block"><div class="footer"><div class="footer-top"><div class="col"><div style="width:70px;height:14px;" class="ph"></div><div style="width:110px;height:8px;" class="th"></div></div><div class="footer-links-group"><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div><div class="footer-col"><div style="width:50px;height:9px;" class="ph"></div><div style="width:60px;height:8px;" class="th"></div></div></div></div><div class="footer-div"></div><div class="footer-bot"><div style="width:130px;height:8px;" class="th"></div><div style="display:flex;gap:8px;"><div class="social-icon sh"></div><div class="social-icon sh"></div><div class="social-icon sh"></div></div></div></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 6 · LOGIN
+══════════════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="page-title">Login page</div>
+  <div class="wf">
+
+    <div class="section-label">Navigation bar</div>
+    <div class="block"><div class="nav"><div class="logo ph"></div><div class="nav-links"><div class="nav-link ph"></div><div class="nav-link ph"></div><div class="nav-link ph"></div></div><div class="nav-cta ph"></div></div></div>
+
+    <!-- CENTERED FORM -->
+    <div class="section-label" style="margin-top:8px;">Centered login card</div>
+    <div class="login-wrap">
+      <!-- Logo + heading -->
+      <div class="col" style="align-items:center;gap:8px;margin-bottom:4px;">
+        <div style="width:44px;height:44px;border-radius:10px;" class="sh"></div>
+        <div style="width:100px;height:16px;" class="ph"></div>
+        <div style="width:160px;height:9px;" class="th"></div>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group">
+        <div class="input-lbl th"></div>
+        <div class="input-field"></div>
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+        <div class="row" style="justify-content:space-between;">
+          <div class="input-lbl th"></div>
+          <div style="width:80px;height:9px;" class="th"></div>
+        </div>
+        <div class="input-field"></div>
+      </div>
+
+      <!-- Submit btn -->
+      <div style="width:100%;height:38px;border-radius:8px;" class="ph"></div>
+
+      <!-- Divider -->
+      <div class="divider-or">or</div>
+
+      <!-- Social login -->
+      <div class="social-login">
+        <div class="social-btn row" style="justify-content:center;gap:8px;"><div style="width:16px;height:16px;border-radius:3px;" class="sh"></div><div style="width:70px;height:9px;" class="th"></div></div>
+        <div class="social-btn row" style="justify-content:center;gap:8px;"><div style="width:16px;height:16px;border-radius:3px;" class="sh"></div><div style="width:70px;height:9px;" class="th"></div></div>
+      </div>
+
+      <!-- Sign up link -->
+      <div style="display:flex;justify-content:center;gap:6px;margin-top:4px;">
+        <div style="width:110px;height:9px;" class="th"></div>
+        <div style="width:60px;height:9px;" class="ph"></div>
+      </div>
+    </div>
+
+    <!-- FOOTER minimal -->
+    <div class="section-sep">Footer (minimal)</div>
+    <div class="block">
+      <div class="block-inner row" style="justify-content:center;gap:24px;">
+        <div style="width:60px;height:8px;" class="th"></div>
+        <div style="width:60px;height:8px;" class="th"></div>
+        <div style="width:60px;height:8px;" class="th"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0 });
+}
+</script>
+</body>
+</html>
