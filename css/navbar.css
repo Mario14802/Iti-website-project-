@@ -63,22 +63,3 @@ nav ul li a:hover::after {
 nav ul li a:hover {
     color: #fff;
 }
-
-nav ul li a.active {
-    color: #fff;
-}
-
-nav ul li a.active::after {
-    width: 100%;
-}
-
-.nav-btn {
-    border: 1px solid #c0392b;
-    padding: 6px 14px;
-    border-radius: 4px;
-}
-
-.nav-btn:hover {
-    background-color: #c0392b;
-    color: #fff;
-}
